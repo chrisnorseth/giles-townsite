@@ -4,6 +4,9 @@ plugins:
 - jekyll-seo-tag
 title: Giles Townsite
 description: A website for the Giles townsite in UT.
+url: https://christiannorseth.com
+baseurl: /giles-townsite
+permalink: pretty
 nav_links:
 - title: Home
   url: /
