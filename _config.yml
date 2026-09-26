@@ -13,3 +13,5 @@ nav_links:
   url: /location/
 - title: Board
   url: /board/
+include:
+- _files
