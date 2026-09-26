@@ -7,10 +7,16 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/print.css' | relative_url }}" media="print">
     <style>
+      body {
+        background: #eef2ed;
+        color: #26322f;
+      }
+
       .site-header {
-        background: #f7f2e7;
-        border-bottom: 1px solid rgba(74, 47, 21, 0.18);
-        margin-bottom: 24px;
+        background: #fbfaf6;
+        border-bottom: 1px solid rgba(40, 76, 63, 0.16);
+        box-shadow: 0 8px 24px rgba(38, 50, 47, 0.08);
+        margin-bottom: 28px;
       }
 
       .site-header__inner {
@@ -24,7 +30,7 @@
       }
 
       .site-header__title {
-        color: #5b3516;
+        color: #263f35;
         font-size: 20px;
         font-weight: 700;
         line-height: 1.1;
@@ -52,7 +58,7 @@
 
       .site-nav__toggle {
         align-items: center;
-        background: #5b3516;
+        background: #2f5848;
         border: 0;
         border-radius: 6px;
         cursor: pointer;
@@ -101,21 +107,72 @@
 
       .site-nav__link {
         background: #fff;
-        border: 1px solid rgba(91, 53, 22, 0.22);
+        border: 1px solid rgba(47, 88, 72, 0.22);
         border-radius: 6px;
-        color: #5b3516;
+        color: #2f5848;
         display: inline-block;
         font-weight: 700;
         line-height: 1;
         padding: 10px 13px;
         text-decoration: none;
+        transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
       }
 
       .site-nav__link:hover,
-      .site-nav__link:focus {
-        background: #5b3516;
+      .site-nav__link:focus,
+      .site-nav__link[aria-current="page"] {
+        background: #2f5848;
+        border-color: #2f5848;
         color: #fff;
         text-decoration: none;
+      }
+
+      #container {
+        background: transparent;
+      }
+
+      #container .inner {
+        background: #fffdfa;
+        border: 1px solid rgba(38, 50, 47, 0.12);
+        border-radius: 8px;
+        box-shadow: 0 18px 40px rgba(38, 50, 47, 0.1);
+        max-width: 860px;
+        padding: 34px 42px 44px;
+      }
+
+      header h1 {
+        color: #263f35;
+        letter-spacing: 0;
+        margin-bottom: 8px;
+      }
+
+      header h2 {
+        color: #6f7a73;
+        font-size: 20px;
+        font-weight: 400;
+      }
+
+      #main_content {
+        font-size: 17px;
+        line-height: 1.7;
+      }
+
+      #main_content h2,
+      #main_content h3 {
+        color: #2f5848;
+        letter-spacing: 0;
+        margin-top: 30px;
+      }
+
+      #main_content a {
+        color: #8a4a2b;
+        font-weight: 700;
+      }
+
+      hr {
+        border: 0;
+        border-top: 1px solid rgba(38, 50, 47, 0.14);
+        margin: 22px 0 26px;
       }
 
       .content-section {
@@ -138,10 +195,10 @@
         }
 
         .site-nav__links {
-          background: #f7f2e7;
-          border: 1px solid rgba(91, 53, 22, 0.16);
+          background: #fbfaf6;
+          border: 1px solid rgba(47, 88, 72, 0.16);
           border-radius: 8px;
-          box-shadow: 0 12px 24px rgba(91, 53, 22, 0.12);
+          box-shadow: 0 12px 24px rgba(38, 50, 47, 0.14);
           display: none;
           flex-direction: column;
           gap: 6px;
@@ -159,6 +216,11 @@
 
         .site-nav__link {
           display: block;
+        }
+
+        #container .inner {
+          border-radius: 0;
+          padding: 26px 22px 34px;
         }
       }
     </style>
@@ -181,7 +243,8 @@
           </button>
           <ul class="site-nav__links" id="site-nav-links">
             {% for link in site.nav_links %}
-              <li><a class="site-nav__link" href="{{ link.url | relative_url }}">{{ link.title }}</a></li>
+              {% assign current_url = page.url | remove: 'index.html' %}
+              <li><a class="site-nav__link" href="{{ link.url | relative_url }}"{% if current_url == link.url %} aria-current="page"{% endif %}>{{ link.title }}</a></li>
             {% endfor %}
           </ul>
         </nav>
@@ -196,12 +259,13 @@
           <h2>{{ page.description }}</h2>
           {% endif %}
         </header>
+        {% if site.show_downloads or site.show_github_link %}
         <section id="downloads" class="clearfix">
           {% if site.show_downloads %}
           <a href="{{ site.github.zip_url }}" id="download-zip" class="button"><span>Download .zip</span></a>
           <a href="{{ site.github.tar_url }}" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
           {% endif %}
-        {% if site.github.public %}
+        {% if site.show_github_link and site.github.public %}
           {% if site.github.is_project_page %}
           <a href="{{ site.github.repository_url }}" id="view-on-github" class="button"><span>View on GitHub</span></a>
           {% else %}
@@ -209,6 +273,7 @@
           {% endif %}
         {% endif %}
         </section>
+        {% endif %}
         <hr>
         <section id="main_content">
           {{ content }}

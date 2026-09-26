@@ -6,14 +6,9 @@ description: A website for the Giles townsite in UT.
 
 ## About Giles
 
-Giles is a place.
+Giles is a historic townsite. There's some interesting history here.
 
-People do things there.
+![sunset1]({{ '/_files/IMG_2386.jpeg' | relative_url }})
+![sunset2]({{ '/_files/IMG_2392.jpeg' | relative_url }})
+![sunset3]({{ '/_files/IMG_2387.jpeg' | relative_url }})
 
-## Location
-
-Giles is a townsite in Utah.
-
-## Contact
-
-Etc.
