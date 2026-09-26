@@ -1,5 +1,15 @@
 remote_theme: pages-themes/tactile@v0.2.0
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
+- jekyll-seo-tag
 title: Giles Townsite
 description: A website for the Giles townsite in UT.
+nav_links:
+- title: Home
+  url: /
+- title: About
+  url: /about/
+- title: Location
+  url: /location/
+- title: Board
+  url: /board/
