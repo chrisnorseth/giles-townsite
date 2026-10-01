@@ -14,4 +14,4 @@ Members of the board:
 
 Contact Kelly Taylor: wildnfreebv@gmail.com
 
-[Download the CC&Rs]({{ '/_files/CC&R's Giles.pdf' | relative_url }})
+[Download the CC&Rs]({{ '/_files/CC%26R's Giles.pdf' | relative_url }})

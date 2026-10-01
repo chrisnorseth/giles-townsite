@@ -12,7 +12,7 @@ The meeting is strictly for lot owners but will be open to all afterwards. Conta
 
 [Annual Meeting Information]({{ '/_files/annual meeting 2026.pdf' | relative_url }})
 
-[Download CC&R's]({{ '/_files/CC&R's Giles.pdf' | relative_url }})
+[Download CC&R's]({{ '/_files/CC%26R's Giles.pdf' | relative_url }})
 
 ## About Giles
 
