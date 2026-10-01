@@ -10,10 +10,10 @@ permalink: pretty
 nav_links:
 - title: Home
   url: /
-- title: About
-  url: /about/
-- title: Location
-  url: /location/
+#- title: About
+#  url: /about/
+#- title: Location
+#  url: /location/
 - title: Board
   url: /board/
 include:
