@@ -12,7 +12,7 @@ The meeting is strictly for lot owners but will be open to all afterwards. Conta
 
 [Annual Meeting Information]({{ '/_files/annual meeting 2026.pdf' | relative_url }})
 
-[Download CC&R's]({{ '/_files/CC%26R's Giles.pdf' | relative_url }})
+[Download CC&Rs]({{ '/_files/ccrs-giles.pdf' | relative_url }})
 
 ## About Giles
 
@@ -21,4 +21,3 @@ Giles is a historic townsite. There's some interesting history here.
 ![sunset1]({{ '/_files/IMG_2386.jpeg' | relative_url }})
 ![sunset2]({{ '/_files/IMG_2392.jpeg' | relative_url }})
 ![sunset3]({{ '/_files/IMG_2387.jpeg' | relative_url }})
-
