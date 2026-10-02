@@ -10,6 +10,8 @@ There will be an annual meeting in Giles on October 24th, 2026 in the Giles Town
 There will be an open mic.
 The meeting is strictly for lot owners but will be open to all afterwards. Contact Kelly for more information.
 
+ATTENTION: The annual fee for lot ownsers is currently $125/yr but could increase as possible increases to water and property taxes become known.
+
 [Annual Meeting Information]({{ '/_files/annual meeting 2026.pdf' | relative_url }})
 
 [Download CC&Rs]({{ '/_files/ccrs-giles.pdf' | relative_url }})
