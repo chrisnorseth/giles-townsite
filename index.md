@@ -4,6 +4,14 @@ title: Giles Townsite
 description: The Giles townsite near Hanksville, UT.
 ---
 
+## River Crossing Camera Feed
+
+| Image 1 | Image 2 |
+|---------|---------|
+| ![flooded]({{ '/_files/floodedCrossing.jpg' | relative_url }}) | ![normal]({{ '/_files/normalCrossing.jpg' | relative_url }}) |
+
+
+
 ## Upcoming Meeting
 
 There will be an annual meeting in Giles on October 24th, 2026 in the Giles Town Hall @ 4pm. Zoom details will be sent out closer to the event.
