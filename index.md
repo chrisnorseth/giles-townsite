@@ -6,7 +6,7 @@ description: The Giles townsite near Hanksville, UT.
 
 ## River Crossing Camera Feed
 
-| Image 1 | Image 2 |
+| Flooded 10/22 | Normal 10/9 |
 |---------|---------|
 | ![flooded]({{ '/_files/floodedCrossing.jpg' | relative_url }}) | ![normal]({{ '/_files/normalCrossing.jpg' | relative_url }}) |
 
