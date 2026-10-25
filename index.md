@@ -16,11 +16,9 @@ description: The Giles townsite near Hanksville, UT.
 
 
 
-## Upcoming Meeting
+## Town Meeting
 
-There will be an annual meeting in Giles on October 24th, 2026 in the Giles Town Hall @ 4pm. Zoom details will be sent out closer to the event.
-There will be an open mic.
-The meeting is strictly for lot owners but will be open to all afterwards. Contact Kelly for more information.
+There was an annual meeting over Zoom on October 24th, 2026.
 
 ATTENTION: The annual fee for lot ownsers is currently $125/yr but could increase as possible increases to water and property taxes become known.
 
