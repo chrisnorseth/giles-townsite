@@ -1,0 +1,11 @@
+{% assign latest_photo = site.data.camera | sort: 'captured_at' | last %}
+<div class="camera-latest">
+{% if latest_photo %}
+  <a href="{{ '/camera/' | relative_url }}"><img src="{{ latest_photo.image | relative_url }}" alt="River crossing at Giles on {{ latest_photo.label | escape }}" fetchpriority="high"></a>
+  <p>Captured <time datetime="{{ latest_photo.captured_at | escape }}">{{ latest_photo.label | escape }}</time> · <a href="{{ '/camera/' | relative_url }}">View camera gallery</a></p>
+{% else %}
+  <a href="{{ '/camera/' | relative_url }}"><img src="{{ '/_files/normalCrossing.jpg' | relative_url }}" alt="An earlier view of the river crossing at Giles"></a>
+  <p>Earlier crossing photo. Daily camera updates are being set up. <a href="{{ '/camera/' | relative_url }}">View camera gallery</a></p>
+{% endif %}
+  <p class="camera-note">Periodic camera photos; conditions may have changed since the image was taken.</p>
+</div>

@@ -3,3 +3,5 @@ _site/
 .sass-cache/
 vendor/
 Gemfile.lock
+.camera-private/
+node_modules/

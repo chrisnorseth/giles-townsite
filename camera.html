@@ -1,0 +1,42 @@
+---
+layout: default
+title: River Crossing Camera
+description: Daily views of the river crossing at Giles.
+permalink: /camera/
+---
+{% assign photos = site.data.camera | sort: 'captured_at' | reverse %}
+{% if photos.size > 0 %}
+<p>Select a photo to enlarge it. Dates show when the camera took each photo, in Mountain Time.</p>
+<p class="camera-note">Periodic camera photos; conditions may have changed since the image was taken.</p>
+{% assign previous_month = '' %}
+{% for photo in photos %}
+  {% assign month = photo.captured_at | slice: 0, 7 %}
+  {% if month != previous_month %}
+    {% unless forloop.first %}</div>{% endunless %}
+    <h2>{{ photo.month_label | escape }}</h2>
+    <div class="camera-grid">
+    {% assign previous_month = month %}
+  {% endif %}
+  <a class="camera-card" href="{{ photo.image | relative_url }}" data-camera-photo data-label="{{ photo.label | escape }}">
+    <img src="{{ photo.thumbnail | default: photo.image | relative_url }}" alt="River crossing on {{ photo.label | escape }}" loading="lazy" decoding="async">
+    <time datetime="{{ photo.captured_at | escape }}">{{ photo.label | escape }}</time>
+  </a>
+  {% if forloop.last %}</div>{% endif %}
+{% endfor %}
+<dialog id="camera-viewer" aria-label="Camera photo viewer">
+  <button type="button" data-camera-close aria-label="Close photo viewer">Close</button>
+  <img id="camera-viewer-image" alt="">
+  <p id="camera-viewer-caption" aria-live="polite"></p>
+  <div class="camera-viewer-controls">
+    <button type="button" data-camera-previous>Previous photo</button>
+    <button type="button" data-camera-next>Next photo</button>
+  </div>
+</dialog>
+<script src="{{ '/assets/js/camera.js' | relative_url }}" defer></script>
+{% else %}
+<p>The daily photo archive is being set up. In the meantime, these earlier photos show the crossing in different conditions.</p>
+<h2>Flooded crossing — October 22</h2>
+<img src="{{ '/_files/floodedCrossing.jpg' | relative_url }}" alt="Flooded river crossing at Giles">
+<h2>Normal crossing — October 9</h2>
+<img src="{{ '/_files/normalCrossing.jpg' | relative_url }}" alt="River crossing at Giles in normal conditions">
+{% endif %}

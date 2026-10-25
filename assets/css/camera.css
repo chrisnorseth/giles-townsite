@@ -1,0 +1,12 @@
+.camera-latest img { display: block; width: 100%; border-radius: 6px; }
+.camera-note { color: #616c65; font-size: .9em; }
+.camera-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px; }
+.camera-card { display: block; border: 1px solid #d6ded7; border-radius: 6px; overflow: hidden; }
+.camera-card img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.camera-card time { display: block; padding: 10px; font-size: .9em; }
+#camera-viewer { width: min(1100px, 90vw); max-height: 90vh; box-sizing: border-box; border: 0; border-radius: 8px; background: #fffdfa; color: #26322f; padding: 16px; }
+#camera-viewer::backdrop { background: rgba(0, 0, 0, .8); }
+#camera-viewer img { display: block; max-height: 65vh; max-width: 100%; margin: 12px auto; object-fit: contain; }
+.camera-viewer-controls { display: flex; justify-content: space-between; gap: 16px; }
+#camera-viewer button { background: #2f5848; color: white; border: 0; border-radius: 5px; padding: 10px 14px; cursor: pointer; font: inherit; }
+#camera-viewer button:disabled { opacity: .45; cursor: default; }

@@ -4,7 +4,11 @@ title: Giles Townsite
 description: The Giles townsite near Hanksville, UT.
 ---
 
-## River Crossing Camera Screenshots (Eventually a Live Feed)
+## River Crossing Camera
+
+{% include camera-latest.html %}
+
+### Earlier crossing conditions
 
 | Flooded 10/22 | Normal 10/9 |
 |---------|---------|

@@ -16,5 +16,7 @@ nav_links:
 #  url: /location/
 - title: Board
   url: /board/
+- title: Camera
+  url: /camera/
 include:
 - _files
