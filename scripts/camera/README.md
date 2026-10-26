@@ -26,8 +26,14 @@ headlessly and opens no desktop windows. It requires the account's login session
 after a restart, someone must log in and unlock FileVault normally. Missed jobs
 can run on wake; they cannot run while the Mac is powered off.
 
-Runtime copies of these two scripts are installed directly in the camera folder.
+Runtime copies of `download.py`, `run.py`, and `auth.py` are installed directly in the camera folder.
 Repository edits to them do not automatically replace the runtime copies.
+
+Authentication snapshots are stored privately as `auth-state.json` (permissions
+0600) in that folder, never in the website checkout. The snapshot includes session
+cookies, local storage and session storage. Successful runs refresh the snapshot;
+the login helper also saves it after a successful interactive login. Keeping only
+a browser profile does not preserve all of these session-only values.
 
 ## Manual run on the iMac
 

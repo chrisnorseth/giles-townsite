@@ -49,6 +49,7 @@ def main():
         status = {'last_success': datetime.now().astimezone().isoformat(),
                   'photos': len(metadata), 'latest_capture': metadata[-1]['captured_at']}
         (ROOT / 'status.json').write_text(json.dumps(status, indent=2) + '\n')
+        (ROOT / 'last-error.txt').unlink(missing_ok=True)
         print('Camera sync complete:', status, flush=True)
     except Exception as error:
         (ROOT / 'last-error.txt').write_text(datetime.now().astimezone().isoformat() + '\n' + str(error) + '\n')

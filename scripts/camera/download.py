@@ -13,6 +13,8 @@ from zoneinfo import ZoneInfo
 
 from PIL import Image, ImageOps
 from playwright.sync_api import sync_playwright
+from playwright.sync_api import TimeoutError as PlaywrightTimeout
+import auth
 
 ROOT = Path.home() / '.server/giles-camera'
 ZONE = ZoneInfo('America/Denver')
@@ -48,7 +50,13 @@ def daily_candidates(rows):
 
 def open_gallery(page, start, end):
     page.goto('https://app.moultriemobile.com/gallery', wait_until='domcontentloaded')
-    page.get_by_test_id('chip-tab-label-SharedGalleries-ChipNavigation').wait_for(timeout=60000)
+    try:
+        page.get_by_test_id('chip-tab-label-SharedGalleries-ChipNavigation').wait_for(timeout=60000)
+    except PlaywrightTimeout as error:
+        if 'login.moultriemobile.com' in page.url or '/authentication/' in page.url:
+            raise RuntimeError('Moultrie login needs renewal; previous website photos are unchanged') from error
+        raise
+    auth.save(page.context, page)
     page.get_by_test_id('chip-tab-label-SharedGalleries-ChipNavigation').click()
     page.get_by_test_id('collection-item-SharedByTimP.-CollectionItemComponent').click()
     page.locator(SCROLL).wait_for()
@@ -187,6 +195,7 @@ def main():
             page = context.pages[0]
         else:
             context = p.chromium.launch_persistent_context(str(ROOT / 'browser-profile'), headless=True)
+            auth.restore(context)
             page = context.pages[0] if context.pages else context.new_page()
         try:
             if not args.current_gallery:
@@ -194,6 +203,7 @@ def main():
             rows = collect(page, start)
             manifest = download(page, rows, start, end)
             render(manifest)
+            auth.save(context, page)
         finally:
             if not args.cdp:
                 context.close()
