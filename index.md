@@ -20,7 +20,7 @@ description: The Giles townsite near Hanksville, UT.
 
 There was an annual meeting over Zoom on October 24th, 2026.
 
-ATTENTION: The annual fee for lot ownsers is currently $125/yr but could increase as possible increases to water and property taxes become known.
+ATTENTION: The annual fee for lot ownsers is currently $125/yr but could increase as possible increases to water and property taxes become known. More information about paying fees [here]({{ '/fees' | relative_url }}).
 
 [Annual Meeting Information]({{ '/_files/annual meeting 2026.pdf' | relative_url }})
 
@@ -29,6 +29,8 @@ ATTENTION: The annual fee for lot ownsers is currently $125/yr but could increas
 ## About Giles
 
 Giles is a historic townsite. There's some interesting history here.
+
+More photos [here]({{ '/photos' | relative_url }}).
 
 ![sunset1]({{ '/_files/IMG_2386.jpeg' | relative_url }})
 ![sunset2]({{ '/_files/IMG_2392.jpeg' | relative_url }})

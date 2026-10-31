@@ -15,9 +15,13 @@ nav_links:
 #  url: /about/
 #- title: Location
 #  url: /location/
+- title: Crossing
+  url: /camera/
+- title: Photos
+  url: /photos/
 - title: Board
   url: /board/
-- title: Camera
-  url: /camera/
+- title: Fees
+  url: /fees/
 include:
 - _files
