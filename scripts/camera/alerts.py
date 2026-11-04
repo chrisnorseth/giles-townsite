@@ -50,6 +50,7 @@ def save_state(value):
 def published_photo():
     request = Request(SITE, headers={'Cache-Control': 'no-cache', 'User-Agent': 'GilesCameraMonitor/1.0'})
     with urlopen(request, timeout=20) as response:
+        page_url = response.geturl()
         parser = LatestPhoto()
         parser.feed(response.read(2_000_000).decode('utf-8'))
     if not parser.capture or not parser.image:
@@ -57,8 +58,8 @@ def published_photo():
     captured = datetime.fromisoformat(parser.capture)
     if captured.tzinfo is None:
         raise ValueError('Camera timestamp has no timezone')
-    image_url = urljoin(SITE, parser.image)
-    if urlsplit(image_url).netloc != urlsplit(SITE).netloc:
+    image_url = urljoin(page_url, parser.image)
+    if urlsplit(image_url).netloc != urlsplit(page_url).netloc:
         raise ValueError('Unexpected camera image host')
     with urlopen(image_url, timeout=20) as response:
         if not response.headers.get_content_type().startswith('image/') or not response.read(1):

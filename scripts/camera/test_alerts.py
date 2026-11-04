@@ -5,6 +5,7 @@ import unittest
 from datetime import datetime
 from pathlib import Path
 from unittest.mock import patch
+from unittest.mock import MagicMock
 
 import alerts
 
@@ -79,6 +80,21 @@ class AlertPolicyTests(unittest.TestCase):
                     '<time datetime="also-wrong"></time>')
         self.assertEqual(parser.image, 'today.jpg')
         self.assertEqual(parser.capture, '2026-11-04T12:49:00-07:00')
+
+    def test_image_is_resolved_against_redirected_homepage(self):
+        homepage = MagicMock()
+        homepage.geturl.return_value = 'https://historic-giles-townsite.com/'
+        homepage.read.return_value = b'<div class="camera-latest"><img src="/assets/camera/today.jpg"><time datetime="2026-11-04T12:49:00-07:00"></time></div>'
+        image = MagicMock()
+        image.headers.get_content_type.return_value = 'image/jpeg'
+        image.read.return_value = b'x'
+        def response(value):
+            wrapper = MagicMock()
+            wrapper.__enter__.return_value = value
+            return wrapper
+        with patch.object(alerts, 'urlopen', side_effect=[response(homepage), response(image)]) as fetch:
+            self.assertEqual(alerts.published_photo(), self.current)
+            self.assertEqual(fetch.call_args.args[0], 'https://historic-giles-townsite.com/assets/camera/today.jpg')
 
 if __name__ == '__main__':
     unittest.main()
