@@ -194,5 +194,19 @@
     "month_label": "November 2026",
     "image": "/assets/camera/20261101T124925.jpg",
     "thumbnail": "/assets/camera/20261101T124925-thumb.jpg"
+  },
+  {
+    "captured_at": "2026-11-02T12:48:00-07:00",
+    "label": "November 2, 2026 at 12:48 PM Mountain Time",
+    "month_label": "November 2026",
+    "image": "/assets/camera/20261102T124926.jpg",
+    "thumbnail": "/assets/camera/20261102T124926-thumb.jpg"
+  },
+  {
+    "captured_at": "2026-11-03T12:49:00-07:00",
+    "label": "November 3, 2026 at 12:49 PM Mountain Time",
+    "month_label": "November 2026",
+    "image": "/assets/camera/20261103T124925.jpg",
+    "thumbnail": "/assets/camera/20261103T124925-thumb.jpg"
   }
 ]
