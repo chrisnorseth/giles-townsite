@@ -26,8 +26,34 @@ headlessly and opens no desktop windows. It requires the account's login session
 after a restart, someone must log in and unlock FileVault normally. Missed jobs
 can run on wake; they cannot run while the Mac is powered off.
 
-Runtime copies of `download.py`, `run.py`, and `auth.py` are installed directly in the camera folder.
+Runtime copies of `download.py`, `run.py`, `auth.py`, and `alerts.py` are installed directly in the camera folder.
 Repository edits to them do not automatically replace the runtime copies.
+
+## Phone alerts
+
+The private `ntfy.json` configuration in the camera folder contains the random
+ntfy.sh topic subscribed to on the owner's phone. Do not commit it. No ntfy
+account password, Moultrie credentials, or log contents are sent in messages.
+
+After runs at or after 14:15 Mountain Time, `alerts.py` checks the public
+homepage's camera capture date and confirms its image is available. It allows
+up to two minutes for website deployment after a successful push. If today's
+photo is missing, it sends one alert for the incident; further failures stay
+quiet until a healthy check sends a recovery notice. It distinguishes download,
+repository, publishing and stale-photo failures using basic status messages.
+Notification state is stored privately in `notification-state.json`.
+
+Before 14:15, healthy runs can send a recovery notice for an existing incident,
+but new failure alerts wait for the afternoon retry. Notifications run on the
+iMac, so they cannot alert while the iMac itself is offline or while its schedule
+is unloaded. Free public topics are not access-controlled: keep the random topic
+private. An ntfy outage is logged locally and does not block camera publishing.
+
+To check the public site manually (without running the downloader):
+
+```sh
+~/.server/giles-camera/.venv/bin/python ~/.server/giles-camera/alerts.py
+```
 
 Authentication snapshots are stored privately as `auth-state.json` (permissions
 0600) in that folder, never in the website checkout. The snapshot includes session

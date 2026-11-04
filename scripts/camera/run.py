@@ -6,6 +6,7 @@ import shutil
 import subprocess
 from datetime import datetime
 from pathlib import Path
+import alerts
 
 ROOT = Path.home() / '.server/giles-camera'
 REPO = ROOT / 'website'
@@ -20,13 +21,16 @@ def main():
     os.environ['TMPDIR'] = str(ROOT / 'tmp')
     lock = (ROOT / 'publish.lock').open('w')
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    stage = 'repository'
     try:
         if git('status', '--porcelain'):
             raise RuntimeError('Website checkout has local changes; stopping to preserve them')
         if git('branch', '--show-current') != 'main':
             raise RuntimeError('Website checkout is not on main')
         git('pull', '--ff-only', 'origin', 'main')
+        stage = 'download'
         subprocess.run([str(ROOT / '.venv/bin/python'), str(ROOT / 'download.py'), '--days', '30'], check=True)
+        stage = 'publish'
         source = ROOT / 'site-files'
         metadata = json.loads((source / '_data/camera.json').read_text())
         if not metadata:
@@ -51,9 +55,12 @@ def main():
         (ROOT / 'status.json').write_text(json.dumps(status, indent=2) + '\n')
         (ROOT / 'last-error.txt').unlink(missing_ok=True)
         print('Camera sync complete:', status, flush=True)
+        stage = None
     except Exception as error:
         (ROOT / 'last-error.txt').write_text(datetime.now().astimezone().isoformat() + '\n' + str(error) + '\n')
         raise
+    finally:
+        alerts.safe_check(stage=stage, attempts=5 if stage is None else 1)
 
 if __name__ == '__main__':
     main()
