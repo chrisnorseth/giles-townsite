@@ -57,10 +57,35 @@ class AlertPolicyTests(unittest.TestCase):
             alerts.check(now=self.now)
             send.assert_called_once()
 
-    def test_healthy_photo_does_not_alert_for_unrelated_job_failure(self):
+    def test_healthy_photo_sends_success_not_failure_for_unrelated_job_failure(self):
         with patch.object(alerts, 'published_photo', return_value=self.current), patch.object(alerts, 'send') as send:
             alerts.check(stage='download', now=self.now)
-            send.assert_not_called()
+            send.assert_called_once()
+            self.assertEqual(send.call_args.args[0], 'Giles camera updated')
+
+    def test_success_sent_once_per_day_and_again_next_day(self):
+        with patch.object(alerts, 'published_photo', return_value=self.current), patch.object(alerts, 'send') as send:
+            alerts.check(now=self.now)
+            alerts.check(now=self.now.replace(hour=15))
+            self.assertEqual(send.call_count, 1)
+            self.assertEqual(self.state()['last_success_notification_date'], '2026-11-04')
+            with patch.object(alerts, 'published_photo', return_value=self.current.replace(day=5)):
+                alerts.check(now=self.now.replace(day=5))
+            self.assertEqual(send.call_count, 2)
+
+    def test_failed_success_notification_retries_without_deduplicating(self):
+        with patch.object(alerts, 'published_photo', return_value=self.current), patch.object(alerts, 'send', side_effect=OSError):
+            with self.assertRaises(OSError):
+                alerts.check(now=self.now)
+        with patch.object(alerts, 'published_photo', return_value=self.current), patch.object(alerts, 'send') as send:
+            alerts.check(now=self.now)
+            send.assert_called_once()
+
+    def test_yesterdays_photo_does_not_send_success(self):
+        with patch.object(alerts, 'published_photo', return_value=self.old), patch.object(alerts, 'send') as send:
+            alerts.check(now=self.now)
+            self.assertEqual(send.call_args.args[0], 'Giles camera needs attention')
+            self.assertNotIn('last_success_notification_date', self.state())
 
     def test_failed_public_image_check_alerts(self):
         with patch.object(alerts, 'published_photo', side_effect=OSError), patch.object(alerts, 'send') as send:

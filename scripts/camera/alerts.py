@@ -115,9 +115,17 @@ def check(stage=None, attempts=1, now=None):
     state['latest_published_capture'] = captured.isoformat() if captured else None
     state['healthy'] = healthy
     if healthy:
+        today = now.date().isoformat()
+        todays_photo = captured.date() == now.date()
         if state.get('active'):
             send('Giles camera recovered', 'Camera updates are working again. The latest photo is live.', recovery=True)
             state['last_notification'] = now.isoformat()
+            if todays_photo:
+                state['last_success_notification_date'] = today
+        elif todays_photo and state.get('last_success_notification_date') != today:
+            send('Giles camera updated', "Today's camera photo is live (" + captured.strftime('%B %-d at %-I:%M %p') + ' Mountain Time).', recovery=True)
+            state['last_notification'] = now.isoformat()
+            state['last_success_notification_date'] = today
         state['active'] = False
     elif after_deadline:
         state['problem'] = problem(stage, captured, expected, read_json(ROOT / 'status.json'))

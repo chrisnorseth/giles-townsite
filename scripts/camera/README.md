@@ -43,6 +43,12 @@ quiet until a healthy check sends a recovery notice. It distinguishes download,
 repository, publishing and stale-photo failures using basic status messages.
 Notification state is stored privately in `notification-state.json`.
 
+A healthy afternoon check sends one "Giles camera updated" notification per
+Mountain Time calendar day, only after verifying today's capture date and the
+published image. A recovery notice for today's photo counts as that day's
+success notification, so retry runs do not send duplicates. A failed ntfy send
+does not mark the daily message as delivered and can be retried on the next run.
+
 Before 14:15, healthy runs can send a recovery notice for an existing incident,
 but new failure alerts wait for the afternoon retry. Notifications run on the
 iMac, so they cannot alert while the iMac itself is offline or while its schedule
