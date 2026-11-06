@@ -31,12 +31,13 @@ class AlertPolicyTests(unittest.TestCase):
             fetch.assert_not_called()
             send.assert_not_called()
 
-    def test_stale_photo_alert_is_deduplicated_across_days(self):
+    def test_stale_photo_sends_daily_failure_without_same_day_duplicates(self):
         with patch.object(alerts, 'published_photo', return_value=self.old), patch.object(alerts, 'send') as send:
             alerts.check(now=self.now)
             alerts.check(now=self.now)
             alerts.check(now=self.now.replace(day=5))
-            self.assertEqual(send.call_count, 1)
+            self.assertEqual(send.call_count, 2)
+            self.assertEqual(self.state()['last_failure_notification_date'], '2026-11-05')
             self.assertTrue(self.state()['active'])
 
     def test_recovery_sent_once(self):

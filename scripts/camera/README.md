@@ -38,8 +38,9 @@ account password, Moultrie credentials, or log contents are sent in messages.
 After runs at or after 14:15 Mountain Time, `alerts.py` checks the public
 homepage's camera capture date and confirms its image is available. It allows
 up to two minutes for website deployment after a successful push. If today's
-photo is missing, it sends one alert for the incident; further failures stay
-quiet until a healthy check sends a recovery notice. It distinguishes download,
+photo is missing, it sends one failure notification per Mountain Time calendar
+day, including during an ongoing incident. Same-day retries stay quiet, and a
+healthy check after an incident sends a recovery notice. It distinguishes download,
 repository, publishing and stale-photo failures using basic status messages.
 Notification state is stored privately in `notification-state.json`.
 

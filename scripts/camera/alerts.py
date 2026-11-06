@@ -129,9 +129,11 @@ def check(stage=None, attempts=1, now=None):
         state['active'] = False
     elif after_deadline:
         state['problem'] = problem(stage, captured, expected, read_json(ROOT / 'status.json'))
-        if not state.get('active'):
+        today = now.date().isoformat()
+        if state.get('last_failure_notification_date') != today:
             send('Giles camera needs attention', state['problem'])
             state['last_notification'] = now.isoformat()
+            state['last_failure_notification_date'] = today
         state['active'] = True
     save_state(state)
     print('Published camera photo check:', 'healthy' if healthy else 'needs attention', flush=True)
