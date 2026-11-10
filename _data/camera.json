@@ -250,5 +250,12 @@
     "month_label": "November 2026",
     "image": "/assets/camera/20261109T124926.jpg",
     "thumbnail": "/assets/camera/20261109T124926-thumb.jpg"
+  },
+  {
+    "captured_at": "2026-11-10T12:49:00-07:00",
+    "label": "November 10, 2026 at 12:49 PM Mountain Time",
+    "month_label": "November 2026",
+    "image": "/assets/camera/20261110T124926.jpg",
+    "thumbnail": "/assets/camera/20261110T124926-thumb.jpg"
   }
 ]
