@@ -2,11 +2,20 @@
 layout: default
 title: Giles Townsite
 description: The Giles townsite near Hanksville, UT.
+homepage: true
 ---
 
-## River Crossing Camera
-
-{% include camera-latest.html %}
+<div class="home-conditions">
+  <section aria-labelledby="crossing-heading">
+    <h2 id="crossing-heading">River Crossing Camera</h2>
+    {% include camera-latest.html %}
+  </section>
+  <aside class="home-weather" aria-labelledby="weather-heading">
+    <h2 id="weather-heading">Giles Weather</h2>
+    <iframe src="https://tempestwx.com/station/102426/grid?embed=true" title="Giles Tempest weather station observations" loading="lazy"></iframe>
+    <a href="https://tempestwx.com/station/102426/">Full weather and forecast on Tempest</a>
+  </aside>
+</div>
 
 ### Earlier crossing conditions
 

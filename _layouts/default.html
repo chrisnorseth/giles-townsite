@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/print.css' | relative_url }}" media="print">
     <link rel="stylesheet" href="{{ '/assets/css/camera.css' | relative_url }}">
+    {% if page.homepage %}
+    <link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}">
+    {% endif %}
     <style>
       body {
         background: #eef2ed;
@@ -252,7 +255,7 @@
       </div>
     </div>
     <div id="container">
-      <div class="inner">
+      <div class="inner{% if page.homepage %} home-inner{% endif %}">
 
         <header>
           <h1>{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
